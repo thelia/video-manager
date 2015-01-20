@@ -14,6 +14,7 @@ namespace Thelia\VideoManager;
 
 use Thelia\VideoManager\Provider\DailymotionProvider;
 use Thelia\VideoManager\Provider\DailymotionShortProvider;
+use Thelia\VideoManager\Provider\ProviderInterface;
 use Thelia\VideoManager\Provider\VimeoProvider;
 use Thelia\VideoManager\Provider\YoutubeProvider;
 use Thelia\VideoManager\Provider\YoutubeShortProvider;
@@ -33,6 +34,8 @@ class ProviderBagBuilder implements ProviderBagBuilderInterface
     public function __construct(ProviderBagInterface $providerBag = null)
     {
         $this->providerBag = $providerBag ?: new ProviderBag();
+
+        $this->addDefaultProviders();
     }
 
     protected function addDefaultProviders()
@@ -46,10 +49,13 @@ class ProviderBagBuilder implements ProviderBagBuilderInterface
         ;
     }
 
+    public function addProvider(ProviderInterface $provider)
+    {
+        $this->providerBag->add($provider);
+    }
+
     public function createProviderBag()
     {
-        $this->addDefaultProviders();
-
         return $this->providerBag;
     }
 }
