@@ -27,7 +27,6 @@ trait BehaviorTrait
         BehaviorInterface::RETURN_NULL,
     );
 
-
     protected function checkBehavior($behavior)
     {
         if (!in_array($behavior, static::$behaviors)) {

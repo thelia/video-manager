@@ -12,7 +12,6 @@
 
 namespace Thelia\VideoManager;
 
-
 /**
  * Interface BehaviorInterface
  * @package Thelia\VideoManager

@@ -12,7 +12,6 @@
 
 namespace Thelia\VideoManager\Exception;
 
-
 /**
  * Class UnknownUrlTypeException
  * @package Thelia\VideoManager\Exception

@@ -11,8 +11,8 @@
 /*************************************************************************************/
 
 namespace Thelia\VideoManager;
-use Thelia\VideoManager\Provider\ProviderInterface;
 
+use Thelia\VideoManager\Provider\ProviderInterface;
 
 /**
  * Class VideoUrl
@@ -28,7 +28,7 @@ class VideoUrl
      */
     protected $provider;
 
-    function __construct($url, ProviderInterface $provider)
+    public function __construct($url, ProviderInterface $provider)
     {
         $this->url = $url;
         $this->provider = $provider;
@@ -43,12 +43,13 @@ class VideoUrl
     }
 
     /**
-     * @param mixed $url
+     * @param  mixed $url
      * @return $this
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -61,12 +62,13 @@ class VideoUrl
     }
 
     /**
-     * @param mixed $provider
+     * @param  mixed $provider
      * @return $this
      */
     public function setProvider(ProviderInterface $provider)
     {
         $this->provider = $provider;
+
         return $this;
     }
 

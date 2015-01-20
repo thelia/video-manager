@@ -11,8 +11,8 @@
 /*************************************************************************************/
 
 namespace Thelia\VideoManager;
-use Thelia\VideoManager\Exception\UnknownUrlTypeException;
 
+use Thelia\VideoManager\Exception\UnknownUrlTypeException;
 
 /**
  * Class VideoManager
@@ -34,7 +34,7 @@ class VideoManager
 
     /**
      * @param $url
-     * @param int $behavior
+     * @param  int                $behavior
      * @return bool|null|VideoUrl
      */
     public function resolve($url, $behavior = BehaviorInterface::RETURN_NULL)
@@ -54,7 +54,7 @@ class VideoManager
                 );
 
             case BehaviorInterface::RETURN_NULL:
-                return null;
+                return;
 
             case BehaviorInterface::RETURN_BOOLEAN:
                 return false;

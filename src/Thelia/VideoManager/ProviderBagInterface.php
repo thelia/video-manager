@@ -34,7 +34,7 @@ interface ProviderBagInterface extends BehaviorInterface
 
     /**
      * @param $name
-     * @param  int $behavior
+     * @param  int                                                        $behavior
      * @return null|false|\Thelia\VideoManager\Provider\ProviderInterface
      * @throws \Thelia\VideoManager\Exception\ProviderNotFoundException
      */
@@ -50,7 +50,7 @@ interface ProviderBagInterface extends BehaviorInterface
 
     /**
      * @param $name
-     * @param int $behavior
+     * @param  int                                                      $behavior
      * @return null|bool
      * @throws \Thelia\VideoManager\Exception\ProviderNotFoundException
      *

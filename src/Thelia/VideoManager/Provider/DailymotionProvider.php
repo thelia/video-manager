@@ -12,7 +12,6 @@
 
 namespace Thelia\VideoManager\Provider;
 
-
 /**
  * Class DailymotionProvider
  * @package Thelia\VideoManager\Provider

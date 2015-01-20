@@ -13,7 +13,6 @@
 namespace Thelia\VideoManager;
 
 use Thelia\VideoManager\Exception\ProviderNotFoundException;
-use Thelia\VideoManager\Exception\UnknownBehaviorException;
 use Thelia\VideoManager\Provider\ProviderInterface;
 
 /**
