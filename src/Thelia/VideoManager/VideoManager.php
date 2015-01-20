@@ -19,17 +19,13 @@ use Thelia\VideoManager\Exception\UnknownUrlTypeException;
  * @package Thelia\VideoManager
  * @author Benjamin Perche <bperche@openstudio.fr>
  */
-class VideoManager
+class VideoManager extends ProviderBagAware
 {
     use BehaviorTrait;
 
-    protected $providerBag;
-
-    public function __construct(ProviderBagBuilderInterface $providerBagBuilder = null)
+    public function __construct(ProviderBagInterface $providerBag = null)
     {
-        $providerBagBuilder = $providerBagBuilder ?: new ProviderBagBuilder();
-
-        $this->providerBag = $providerBagBuilder->createProviderBag();
+        $this->providerBag = $providerBag ?: new ProviderBag();
     }
 
     /**
@@ -54,18 +50,10 @@ class VideoManager
                 );
 
             case BehaviorInterface::RETURN_NULL:
-                return;
+                return null;
 
             case BehaviorInterface::RETURN_BOOLEAN:
                 return false;
         }
-    }
-
-    /**
-     * @return ProviderBag|ProviderBagInterface
-     */
-    public function getProviderBag()
-    {
-        return $this->providerBag;
     }
 }

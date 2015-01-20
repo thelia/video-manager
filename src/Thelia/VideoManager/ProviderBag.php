@@ -24,6 +24,9 @@ class ProviderBag implements ProviderBagInterface
 {
     use BehaviorTrait;
 
+    /**
+     * @var \Thelia\VideoManager\Provider\ProviderInterface[]
+     */
     protected $providers;
 
     public function add(ProviderInterface $provider, $alias = null)
