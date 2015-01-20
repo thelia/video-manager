@@ -24,13 +24,11 @@ class VimeoProvider extends AbstractProvider
 
     protected $playerWidth;
     protected $playerHeight;
-    protected $autoPlay;
 
-    public function __construct($playerWidth = 560, $playerHeight = 315, $autoPlay = false)
+    public function __construct($playerWidth = 560, $playerHeight = 315)
     {
         $this->playerWidth = $playerWidth;
         $this->playerHeight = $playerHeight;
-        $this->autoPlay = false;
     }
 
     /**
@@ -78,7 +76,6 @@ class VimeoProvider extends AbstractProvider
             "src" => $this->getEmbedLinkToVideo($url),
             "frameborder" => "0",
             "allowfullscreen" => null,
-            "autoplay" => (int) $this->autoPlay,
         );
 
         return $this->createHtmlTag("iframe", "", $attributes, true);
@@ -102,7 +99,7 @@ class VimeoProvider extends AbstractProvider
 
         return preg_match("#^(www\.)?vimeo\.com$#", $parsedUrl["host"]) &&
             preg_match("#^(/[^/]+)*/\d+$#", $parsedUrl["path"])
-            ;
+        ;
     }
 
     /**
@@ -149,25 +146,6 @@ class VimeoProvider extends AbstractProvider
     public function setPlayerHeight($playerHeight)
     {
         $this->playerHeight = $playerHeight;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAutoPlay()
-    {
-        return $this->autoPlay;
-    }
-
-    /**
-     * @param  mixed $autoPlay
-     * @return $this
-     */
-    public function setAutoPlay($autoPlay)
-    {
-        $this->autoPlay = $autoPlay;
 
         return $this;
     }

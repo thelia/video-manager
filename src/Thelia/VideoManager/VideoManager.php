@@ -32,6 +32,11 @@ class VideoManager
         $this->providerBag = $providerBagBuilder->createProviderBag();
     }
 
+    /**
+     * @param $url
+     * @param int $behavior
+     * @return bool|null|VideoUrl
+     */
     public function resolve($url, $behavior = BehaviorInterface::RETURN_NULL)
     {
         $this->checkBehavior($behavior);

@@ -37,7 +37,7 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            '<iframe width="560" height="315" src="//player.vimeo.com/video/115794083" frameborder="0" allowfullscreen autoplay="0"></iframe>',
+            '<iframe width="560" height="315" src="//player.vimeo.com/video/115794083" frameborder="0" allowfullscreen></iframe>',
             $provider->getVideoPlayerWidget(static::VALID_VIMEO_URL)
         );
     }

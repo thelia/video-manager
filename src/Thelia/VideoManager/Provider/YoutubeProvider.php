@@ -75,6 +75,10 @@ class YoutubeProvider extends AbstractProvider
             $src .= "list=".$parsedUrl["query"]["list"]."&";
         }
 
+        if ($this->autoPlay) {
+            $src .= "autoplay=1";
+        }
+
         $src .= "rel=0";
 
         return $src;
@@ -95,7 +99,6 @@ class YoutubeProvider extends AbstractProvider
             "src" => $this->getEmbedLinkToVideo($url),
             "frameborder" => "0",
             "allowfullscreen" => null,
-            "autoplay" => (int) $this->autoPlay,
         );
 
         return $this->createHtmlTag("iframe", "", $attributes, true);

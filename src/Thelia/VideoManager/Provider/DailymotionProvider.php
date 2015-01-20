@@ -73,6 +73,10 @@ class DailymotionProvider extends AbstractProvider
     {
         if ($this->isVideo($parsedUrl["path"])) {
             $buildUrl .= "video/".$this->extractId($parsedUrl["path"]);
+
+            if ($this->autoPlay) {
+                $buildUrl .= "?autoPlay=1";
+            }
         } elseif ($this->isPlaylist($parsedUrl["path"])) {
             $buildUrl .= "playlist/".$this->extractId($parsedUrl["path"]);
 
