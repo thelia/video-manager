@@ -1,0 +1,28 @@
+{
+    "name": "thelia/video-manager",
+    "description": "Video managing library",
+    "require-dev": {
+        "phpunit/phpunit": "~4.1"
+    },
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "Benjamin Perche",
+            "email": "bperche@openstudio.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.3.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thelia\\VideoManager\\": "src/Thelia/VideoManager/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thelia\\VideoManager\\Tests\\": "tests/"
+        }
+    }
+}
