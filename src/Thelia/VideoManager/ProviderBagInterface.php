@@ -19,12 +19,8 @@ use Thelia\VideoManager\Provider\ProviderInterface;
  * @package Thelia\VideoManager
  * @author Benjamin Perche <bperche@openstudio.fr>
  */
-interface ProviderBagInterface
+interface ProviderBagInterface extends BehaviorInterface
 {
-    const RETURN_BOOLEAN = 0;
-    const THROW_EXCEPTION_ON_ERROR = 1;
-    const RETURN_NULL = 2;
-
     /**
      * @param  ProviderInterface $provider
      * @param  null              $alias
@@ -38,10 +34,34 @@ interface ProviderBagInterface
 
     /**
      * @param $name
-     * @param  int                                                        $behavior
+     * @param  int $behavior
      * @return null|false|\Thelia\VideoManager\Provider\ProviderInterface
-     *
-     *
+     * @throws \Thelia\VideoManager\Exception\ProviderNotFoundException
      */
     public function get($name, $behavior = self::RETURN_NULL);
+
+    /**
+     * @param $name
+     * @return bool
+     *
+     * Check if the provider exists
+     */
+    public function has($name);
+
+    /**
+     * @param $name
+     * @param int $behavior
+     * @return null|bool
+     * @throws \Thelia\VideoManager\Exception\ProviderNotFoundException
+     *
+     * Delete's a provider with its name
+     */
+    public function delete($name, $behavior = self::THROW_EXCEPTION_ON_ERROR);
+
+    /**
+     * @return \Thelia\VideoManager\Provider\ProviderInterface[]
+     *
+     * Dump all the providers
+     */
+    public function all();
 }

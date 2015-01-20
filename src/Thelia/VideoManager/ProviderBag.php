@@ -23,13 +23,9 @@ use Thelia\VideoManager\Provider\ProviderInterface;
  */
 class ProviderBag implements ProviderBagInterface
 {
-    protected $providers;
+    use BehaviorTrait;
 
-    protected static  $behaviors = array(
-        self::THROW_EXCEPTION_ON_ERROR,
-        self::RETURN_BOOLEAN,
-        self::RETURN_NULL,
-    );
+    protected $providers;
 
     public function add(ProviderInterface $provider, $alias = null)
     {
@@ -92,15 +88,6 @@ class ProviderBag implements ProviderBagInterface
                 throw new ProviderNotFoundException(
                     "The provider '$name' doesn't exist"
                 );
-        }
-    }
-
-    protected function checkBehavior($behavior)
-    {
-        if (!in_array($behavior, static::$behaviors)) {
-            throw new UnknownBehaviorException(
-                "The behavior '$behavior' doesn't exist"
-            );
         }
     }
 
