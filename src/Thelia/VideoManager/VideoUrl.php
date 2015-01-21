@@ -54,7 +54,7 @@ class VideoUrl
     }
 
     /**
-     * @return mixed
+     * @return ProviderInterface
      */
     public function getProvider()
     {
