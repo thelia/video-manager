@@ -12,33 +12,34 @@
 
 namespace Thelia\VideoManager\Tests;
 
-use Thelia\VideoManager\Provider\DailymotionShortProvider;
+use Thelia\VideoManager\Provider\YahooScreenProvider;
+
 
 /**
- * Class DailymotionShortProviderTest
- * @package Thelia\VideoManager\Tests
+ * Class YahooScreenProviderTest
+ * @package Thelia\VideoManager\tests
  * @author Benjamin Perche <bperche@openstudio.fr>
  */
-class DailymotionShortProviderTest extends \PHPUnit_Framework_TestCase
+class YahooScreenProviderTest extends \PHPUnit_Framework_TestCase
 {
-    const VALID_DAILYMOTION_URL = "http://dai.ly/video/xcsx4y_thelia_tech";
+    const VALID_YAHOO_SCREEN_URL = "https://fr.screen.yahoo.com/johnny-b-goode-162801505.html";
 
     public function testParseUrl()
     {
-        $provider = new DailymotionShortProvider();
+        $provider = new YahooScreenProvider();
 
-        $this->assertTrue($provider->handleUrl(static::VALID_DAILYMOTION_URL));
+        $this->assertTrue($provider->handleUrl(static::VALID_YAHOO_SCREEN_URL));
         $this->assertFalse($provider->handleUrl("foobar"));
-        $this->assertFalse($provider->handleUrl("https://dai.ly/"));
+        $this->assertFalse($provider->handleUrl("https://screen.yahoo.com/"));
 
         $this->assertEquals(
-            "http://dai.ly/video/xcsx4y",
-            $provider->getLinkToVideo(static::VALID_DAILYMOTION_URL)
+            "https://fr.screen.yahoo.com/johnny-b-goode-162801505.html",
+            $provider->getLinkToVideo(static::VALID_YAHOO_SCREEN_URL)
         );
 
         $this->assertEquals(
-            '<iframe frameborder="0" width="560" height="315" src="//www.dailymotion.com/embed/video/xcsx4y" allowfullscreen></iframe>',
-            $provider->getVideoPlayerWidget(static::VALID_DAILYMOTION_URL)
+            '<iframe width="560" height="315" src="https://fr.screen.yahoo.com/johnny-b-goode-162801505.html" scrolling="no" frameborder="0" allowfullscreen allowtransparency></iframe>',
+            $provider->getVideoPlayerWidget(static::VALID_YAHOO_SCREEN_URL)
         );
     }
 }

@@ -10,7 +10,7 @@
 /* file that was distributed with this source code.                                  */
 /*************************************************************************************/
 
-namespace Thelia\VideoManager\tests;
+namespace Thelia\VideoManager\Tests;
 
 use Thelia\VideoManager\Provider\DailymotionProvider;
 
