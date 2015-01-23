@@ -57,4 +57,26 @@ interface ProviderInterface
      * Get the name of the provider. It is used to store the provider in the ProviderBag
      */
     public function getName();
+
+    /**
+     * @return int
+     */
+    public function getPlayerWidth();
+
+    /**
+     * @return int
+     */
+    public function getPlayerHeight();
+
+    /**
+     * @param $width
+     * @return $this
+     */
+    public function setPlayerWidth($width);
+
+    /**
+     * @param $height
+     * @return $this
+     */
+    public function setPlayerHeight($height);
 }
