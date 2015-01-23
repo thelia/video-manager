@@ -12,33 +12,33 @@
 
 namespace Thelia\VideoManager\Tests;
 
-use Thelia\VideoManager\Provider\YahooScreenProvider;
+use Thelia\VideoManager\Provider\VineProvider;
 
 /**
- * Class YahooScreenProviderTest
+ * Class VineProviderTest
  * @package Thelia\VideoManager\Tests
  * @author Benjamin Perche <bperche@openstudio.fr>
  */
-class YahooScreenProviderTest extends \PHPUnit_Framework_TestCase
+class VineProviderTest extends \PHPUnit_Framework_TestCase
 {
-    const VALID_YAHOO_SCREEN_URL = "https://fr.screen.yahoo.com/johnny-b-goode-162801505.html";
+    const VALID_VINE_URL = "https://vine.co/v/OD209dwB1dz";
 
     public function testParseUrl()
     {
-        $provider = new YahooScreenProvider();
+        $provider = new VineProvider();
 
-        $this->assertTrue($provider->handleUrl(static::VALID_YAHOO_SCREEN_URL));
+        $this->assertTrue($provider->handleUrl(static::VALID_VINE_URL));
         $this->assertFalse($provider->handleUrl("foobar"));
-        $this->assertFalse($provider->handleUrl("https://screen.yahoo.com/"));
+        $this->assertFalse($provider->handleUrl("https://vine.co/v/"));
 
         $this->assertEquals(
-            "https://fr.screen.yahoo.com/johnny-b-goode-162801505.html",
-            $provider->getLinkToVideo(static::VALID_YAHOO_SCREEN_URL)
+            "https://vine.co/v/OD209dwB1dz",
+            $provider->getLinkToVideo(static::VALID_VINE_URL)
         );
 
         $this->assertEquals(
-            '<iframe width="560" height="315" src="https://fr.screen.yahoo.com/johnny-b-goode-162801505.html" scrolling="no" frameborder="0" allowfullscreen allowtransparency></iframe>',
-            $provider->getVideoPlayerWidget(static::VALID_YAHOO_SCREEN_URL)
+            '<iframe class="vine-embed" src="https://vine.co/v/OD209dwB1dz/embed/simple" width="600" height="600" frameborder="0"></iframe><script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>',
+            $provider->getVideoPlayerWidget(static::VALID_VINE_URL)
         );
     }
 }

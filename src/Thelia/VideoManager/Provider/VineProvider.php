@@ -12,20 +12,26 @@
 
 namespace Thelia\VideoManager\Provider;
 
+
 /**
- * Class YahooScreenProvider
+ * Class VineProvider
  * @package Thelia\VideoManager\Provider
  * @author Benjamin Perche <bperche@openstudio.fr>
  */
-class YahooScreenProvider extends AbstractProvider
+class VineProvider extends AbstractProvider
 {
+    const MAGIC_REGEX = "#^(/v/([^/]+))(/embed)?$#";
+    const BASE_URL = "https://vine.co/v/";
+
     protected $playerWidth;
     protected $playerHeight;
+    protected $autoplayAudio;
 
-    public function __construct($playerWidth = 560, $playerHeight = 315)
+    public function __construct($playerWidth = 600, $playerHeight = 600, $autoplayAudio = false)
     {
         $this->playerWidth = $playerWidth;
         $this->playerHeight = $playerHeight;
+        $this->autoplayAudio = $autoplayAudio;
     }
 
     /**
@@ -37,8 +43,11 @@ class YahooScreenProvider extends AbstractProvider
      */
     public function getLinkToVideo($url)
     {
-        // well ........
-        return $url;
+        $parsedUrl = $this->parseUrl($url);
+
+        preg_match(static::MAGIC_REGEX, $parsedUrl["path"], $match);
+
+        return static::BASE_URL . $match[2];
     }
 
     /**
@@ -48,8 +57,13 @@ class YahooScreenProvider extends AbstractProvider
      */
     public function getEmbedLinkToVideo($url)
     {
-        // well ...
-        return $url;
+        $link = $this->getLinkToVideo($url) . "/embed/simple";
+
+        if ($this->autoplayAudio) {
+            $link .= "?audio=1";
+        }
+
+        return $link;
     }
 
     /**
@@ -62,16 +76,24 @@ class YahooScreenProvider extends AbstractProvider
     public function getVideoPlayerWidget($url)
     {
         $attributes = [
+            "class" => "vine-embed",
+            "src" => $this->getEmbedLinkToVideo($url),
             "width" => $this->playerWidth,
             "height" => $this->playerHeight,
-            "src" => $this->getEmbedLinkToVideo($url),
-            "scrolling" => "no",
             "frameborder" => "0",
-            "allowfullscreen" => null,
-            "allowtransparency" => null,
         ];
 
-        return $this->createHtmlTag("iframe", '', $attributes, true);
+        $tags = $this->createHtmlTag("iframe", '', $attributes, true);
+
+        $scriptAttributes = [
+            "async" => null,
+            "src" => "//platform.vine.co/static/scripts/embed.js",
+            "charset" => "utf-8",
+        ];
+
+        $tags .= $this->createHtmlTag("script", '', $scriptAttributes, true);
+
+        return $tags;
     }
 
     /**
@@ -83,7 +105,7 @@ class YahooScreenProvider extends AbstractProvider
     {
         $parsedUrl = $this->parseUrl($url);
 
-        return preg_match("#^([a-z]{2}\.)screen.yahoo.com$#", $parsedUrl["host"]) && '/' !== $parsedUrl["path"];
+        return "vine.co" === $parsedUrl["host"] && preg_match(static::MAGIC_REGEX, $parsedUrl["path"]);
     }
 
     /**
@@ -93,11 +115,11 @@ class YahooScreenProvider extends AbstractProvider
      */
     public function getName()
     {
-        return "yahoo";
+        return "vine";
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getPlayerWidth()
     {
@@ -105,7 +127,7 @@ class YahooScreenProvider extends AbstractProvider
     }
 
     /**
-     * @param int $playerWidth
+     * @param mixed $playerWidth
      * @return $this
      */
     public function setPlayerWidth($playerWidth)
@@ -115,7 +137,7 @@ class YahooScreenProvider extends AbstractProvider
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getPlayerHeight()
     {
@@ -123,12 +145,30 @@ class YahooScreenProvider extends AbstractProvider
     }
 
     /**
-     * @param int $playerHeight
+     * @param mixed $playerHeight
      * @return $this
      */
     public function setPlayerHeight($playerHeight)
     {
         $this->playerHeight = $playerHeight;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAutoplayAudio()
+    {
+        return $this->autoplayAudio;
+    }
+
+    /**
+     * @param boolean $autoplayAudio
+     * @return $this
+     */
+    public function setAutoplayAudio($autoplayAudio)
+    {
+        $this->autoplayAudio = $autoplayAudio;
         return $this;
     }
 }
